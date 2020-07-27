@@ -25,6 +25,7 @@
 				if(deleteYN == true){
 					formObj.attr("action", "/board/delete");
 					formObj.attr("method", "post");
+					
 					formObj.submit();
 				}
 			})
@@ -54,7 +55,7 @@
 			
 			<section id="container">
 				<form name="readForm" role="form" method="post">
-					<input type="hidden" id="bno" name="bno" value="<c:out value="{read.bno}" />">
+					<input type="hidden" id="bno" name="bno" value="<c:out value="${read.bno}" />">
 					<input type="hidden" name='page' value='<c:out value="${cri.page }" />'>
 					<input type="hidden" name="perPageNum" value='<c:out value="${cri.perPageNum }" />'>
 				</form>

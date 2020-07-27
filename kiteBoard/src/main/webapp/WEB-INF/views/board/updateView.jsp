@@ -8,7 +8,7 @@
 	</head>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			var formObj = $("upForm");
+			var formObj = $("form");
 			
 			$(".cancel_btn").on("click", function(){
 				event.preventDefault();
@@ -50,11 +50,7 @@
 			<hr />
 			
 			<section id="container">
-				<form name="upForm" role="form" method="post" action="/board/list">
-					<input type="hidden" name="bno" value="${update.bno}" readonly="readonly"/>
-					<input type="hidden" name="page" value="<c:out value='${cri.page }'/>">
-					<input type="hidden" name="perPageNum" value="<c:out value='${cri.perPageNum }'/>">
-				</form>
+				
 				<form name="updateForm" role="form" method="post" action="/board/update">
 					<table>
 						<tbody>
@@ -81,13 +77,17 @@
 							</tr>
 							<tr>
 								<td>
-									<input type="submit" class="update_btn" value="저장"></input>
+									<input type="button" class="update_btn" value="저장"></input>
 									<input type="button" class="cancel_btn" value="취소"></input>
 								</td>
 							</tr>
 						</tbody>	
 					</table>
-					
+					<div>
+						<input type="hidden" name="bno" value="${update.bno}" readonly="readonly"/>
+						<input type="hidden" name="page" value="<c:out value='${cri.page }'/>">
+						<input type="hidden" name="perPageNum" value="<c:out value='${cri.perPageNum }'/>">
+					</div>
 				</form>
 			</section>
 			<hr />

@@ -57,9 +57,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/updateView", method=RequestMethod.GET)
-	public String updateView(BoardVO boardVO,  @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-		model.addAttribute("cri",cri);
-		model.addAttribute("update",service.read(boardVO.getBno()));
+	public String updateView(int bno,  @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+		
+		model.addAttribute("update",service.read(bno));
 		return "board/updateView";
 	}
 	
@@ -70,7 +70,7 @@ public class BoardController {
 			rttr.addFlashAttribute("page","success");
 		}
 		rttr.addAttribute("page", cri.getPage());
-		rttr.addAttribute("amount",cri.getPerPageNum());
+		rttr.addAttribute("perPageNum",cri.getPerPageNum());
 		
 		return "redirect:/board/list";
 	}
@@ -83,7 +83,7 @@ public class BoardController {
 		}
 		
 		rttr.addAttribute("page", cri.getPage());
-		rttr.addAttribute("amount",cri.getPerPageNum());
+		rttr.addAttribute("perPageNum",cri.getPerPageNum());
 		
 		return "redirect:/board/list";
 	}
