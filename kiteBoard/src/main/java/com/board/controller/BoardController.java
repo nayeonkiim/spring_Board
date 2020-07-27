@@ -43,7 +43,11 @@ public class BoardController {
 		logger.info("list");
 		
 		model.addAttribute("list",service.list(cri));
-		model.addAttribute("pageMaker", new PageMaker(cri,123));
+		
+		int total = service.TotalCount(cri);
+		logger.info("total: "+total);
+		
+		model.addAttribute("pageMaker", new PageMaker(cri,total));
 		
 		return "board/list";
 	}
@@ -87,4 +91,5 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
+
 }

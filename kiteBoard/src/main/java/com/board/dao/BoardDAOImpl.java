@@ -53,4 +53,11 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectOne("com.board.mappers.boardMapper.listCount");
 	}
 
+	@Override
+	public int getTotalCount(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		
+		return sqlSession.selectOne("com.board.mappers.boardMapper.getTotalCount");
+	}
+
 }

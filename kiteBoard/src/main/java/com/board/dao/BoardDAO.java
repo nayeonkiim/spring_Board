@@ -24,4 +24,7 @@ public interface BoardDAO {
 	
 	//게시물 삭제
 	public int delete(int bno) throws Exception;
+	
+	//전체 데이터 갯수 조회
+	public int getTotalCount(Criteria cri) throws Exception;
 }

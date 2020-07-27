@@ -24,4 +24,7 @@ public interface BoardService {
 	
 	//게시물 삭제
 	public boolean delete(int bno) throws Exception;
+	
+	//게시물 갯수 조회
+	public int TotalCount(Criteria cri) throws Exception;
 }
