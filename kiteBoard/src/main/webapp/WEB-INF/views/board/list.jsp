@@ -55,7 +55,7 @@
 					
 					<c:forEach items="${list }" var="list">
 						<tr>
-							<td><c:out value="${list.bno }" /></td>
+							<td><c:out value="${list.bno}" /></td>
 							<td>
 								<a class="move" href="<c:out value="${list.bno }" />"><c:out value="${list.title}" /></a>
 							</td>
