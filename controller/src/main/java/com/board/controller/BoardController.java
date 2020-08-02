@@ -76,12 +76,14 @@ public class BoardController {
 		if (service.update(boardVO)) {
 			rttr.addFlashAttribute("page","success");
 		}
-		rttr.addAttribute("page", cri.getPage());
-		rttr.addAttribute("perPageNum",cri.getPerPageNum());
-		rttr.addAttribute("type", cri.getType());
-		rttr.addAttribute("keyword", cri.getKeyword());
+		/*
+		 * rttr.addAttribute("page", cri.getPage());
+		 * rttr.addAttribute("perPageNum",cri.getPerPageNum());
+		 * rttr.addAttribute("type", cri.getType()); rttr.addAttribute("keyword",
+		 * cri.getKeyword());
+		 */
 		
-		return "redirect:/board/list";
+		return "redirect:/board/list" + cri.getListLink();
 	}
 	
 	@RequestMapping(value="board/delete", method=RequestMethod.POST)
@@ -91,12 +93,14 @@ public class BoardController {
 			rttr.addFlashAttribute("page",cri.getPage());
 		}
 		
-		rttr.addAttribute("page", cri.getPage());
-		rttr.addAttribute("perPageNum",cri.getPerPageNum());
-		rttr.addAttribute("type", cri.getType());
-		rttr.addAttribute("keyword", cri.getKeyword());
+		/*
+		 * rttr.addAttribute("page", cri.getPage());
+		 * rttr.addAttribute("perPageNum",cri.getPerPageNum());
+		 * rttr.addAttribute("type", cri.getType()); rttr.addAttribute("keyword",
+		 * cri.getKeyword());
+		 */
 		
-		return "redirect:/board/list";
+		return "redirect:/board/list" + cri.getListLink();
 	}
 
 }

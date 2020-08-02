@@ -10,7 +10,7 @@
    	values (tbl_board_seq.nextval, #{title}, #{content}, #{writer})
    </insert>
    
-   <sql id="criteria">
+  <sql id="criteria">
    	<trim prefix="(" suffix=") and " prefixOverrides="or">
    		<foreach item="type" collection="typeArr">
    			<trim prefix="or">
