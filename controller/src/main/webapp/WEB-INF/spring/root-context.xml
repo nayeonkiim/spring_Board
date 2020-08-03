@@ -29,7 +29,10 @@
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
     </bean>
     
+	<mybatis-spring:scan base-package="com.board.mappers"/> 
     <context:component-scan base-package="com.board.service"></context:component-scan>
     <context:component-scan base-package="com.board.dao"></context:component-scan>
     <context:component-scan base-package="com.board.vo"></context:component-scan>
+    
+   	
 </beans>
