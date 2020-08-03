@@ -8,19 +8,9 @@
 	</head>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			var formObj = $("form");
+			var formObj = $("form[name='updateForm']");
 
-			$('button').on("click", function(e){
-
-				e.preventDefault();
-
-				var operation = $(this).data("oper");
-
-				cosole.log(operation);
-
-				if(operation === 'remove'){
-					formObj.attr("action","/board/delete");
-				}else if(operation === 'list'){
+			$(".list_btn").on("click", function(){
 					formObj.attr("action","/board/list").attr("method","get");
 					
 					var pagTag = $("input[name='page']").clone();
@@ -34,10 +24,15 @@
 					formObj.append(amountTag);
 					formObj.append(keywordTag);
 					formObj.append(typeTag);
-				}
-				formObj.submit();
-			});			
 
+					formObj.submit();
+			}
+			
+			$(".modify_btn").on("click", function(){		
+					formObj.attr("action","/board/update");
+					formObj.attr("method","post");
+					formObj.submit();
+			}
 		});
 	
 	</script>
@@ -82,9 +77,8 @@
 							</tr>
 							<tr>
 								<td>
-									<button type="submit" data-oper='modify'>Modify</button>
-									<button type="submit" data-oper='remove'>Remove</button>
-									<button type="submit" data-oper='list'>List</button>
+									<button type="submit" class='modify_btn'>Save</button>
+									<button type="submit" class='list_btn'>List</button>
 								</td>
 							</tr>
 						</tbody>	
