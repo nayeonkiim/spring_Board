@@ -92,6 +92,32 @@ var replyService = (function(){
 		});
 	}
 	
+	function displayTime(timeValue){
+		var today = new Date();
+		
+		var gap = today.getTime() - timeValue;
+		
+		var dateObj = new Date(timeValue);
+		var str = "";
+		
+		if(gap < (1000 * 60 * 60 * 24)) {
+			
+			var hh = dateObj.getHours();
+			var mi = dataObj.getMinutes();
+			var ss = dataObj.getSeconds();
+			
+			return [ (hh > 9 ? '' : '0') + hh, ":", (mi > 9 ? '':'0') + mi,
+				":", (ss > 9 ? '' : '0') + ss ].join('');
+		}else{
+			var yy = dataObj.getFullYear();
+			var mm = dateObj.getMinutes();
+			var ss = dateObj.getSeconds();
+			
+			return [ (hh > 9 ? '' : '0') + hh, ':', (mi > 9 ? '' : '0') + mi,
+				':', (ss > 9 ? '' : '0') + ss ].join('');
+		}
+	};
+	
 	return {
 		add : add,
 		getList : getList,
@@ -99,4 +125,5 @@ var replyService = (function(){
 		update : update,
 		get : get
 	};
+	
 })();

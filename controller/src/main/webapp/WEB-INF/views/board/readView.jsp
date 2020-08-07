@@ -5,6 +5,9 @@
 	<head>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	 	<title>게시판</title>
+	 	<style>
+	 		ul{list-style:none;}
+	 	</style>
 	</head>
 	
 	<script type="text/javascript" src="/resources/js/reply.js"></script>	
@@ -12,8 +15,7 @@
 	<script>
 		console.log("=============");
 		console.log("JS TEST");
-
-		var bnoValue = '<c:out value="${read.bno}"/>';
+	
 		
 	// for replyService add test
 /* 		replyService.add(
@@ -56,9 +58,9 @@
 			 */
 
 	// 단순히 댓글의 번호만을 전달
-	replyService.get(10, function(data){
-		console.log(data);
-	})
+/* 	replyService.get(10, function(data){
+		console.log(data);*/
+	}) 
 		
 	</script>
 	
@@ -66,6 +68,31 @@
 		$(document).ready(function(){
 			
 			var formObj = $("form[name='readForm']");
+			
+			var bnoValue = '<c:out value="${read.bno}"/>';
+			var replyUL = $(".chat");
+
+			showList(1);
+
+			function showList(page){
+
+				replyService.getList({bno:bnoValue,page: page || 1}, function(list){
+
+					var str = "";
+					if(list == null || list.length == 0){
+						replyUL.html("");
+						return;
+					}
+					for(var i=0, len = list.length || 0; i<len; i++){
+						str += "<li data-rno='"+list[i].rno+"'>";
+						str += " <div><strong>"+list[i].replyer+"</strong>";
+						str += "   <small>"+list[i].replyDate+"</small></div>";
+						str += "       <p>"+list[i].reply+"</p></li><hr/>";
+					}
+					replyUL.html(str);
+				});
+			}
+		
 			
 			// 수정 
 			$(".update_btn").on("click", function(){
@@ -149,6 +176,23 @@
 				</div>
 			</section>
 			<hr />
+			
+			<div>
+				<div>
+					<i>Reply</i>
+					<hr/>
+				</div>
+				<ul class="chat" >
+					<li>
+						<div>
+							<strong>user00</strong>
+							<small>2020-08-07</small>
+						</div>
+						<p>Good job!</p>
+					</li>
+					<hr/>
+				</ul>
+			</div>
 		</div>
 	</body>
 </html>
