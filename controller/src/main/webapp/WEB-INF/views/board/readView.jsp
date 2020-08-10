@@ -9,14 +9,39 @@
 	 		ul{list-style:none;}
 	 	</style>
 	</head>
-	
-	<script type="text/javascript" src="/resources/js/reply.js"></script>	
-	
-	<script>
-		console.log("=============");
-		console.log("JS TEST");
-	
+
+	 <script type="text/javascript" src="/resources/js/reply.js"></script>	
+	 <script>
+	 $(document).ready(function(){
+			
+			var bnoValue = '<c:out value="${read.bno}"/>';
+			var replyUL = $(".chat");
+
+			showList(1);
+
+			function showList(page){
+
+				replyService.getList({bno:bnoValue,page: page || 1}, function(list){
+
+					var str = "";
+					if(list == null || list.length == 0){
+						replyUL.html("");
+						return;
+					}
+					
+					for(var i=0, len = list.length || 0; i<len; i++){
+						//var replyDate = replyService.displayTime(list[i].replyDate);
+						str += "<li data-rno='"+list[i].rno+"'>";
+						str += " <div><strong>"+list[i].replyer+"</strong>";
+						str += "   <small>"+ replyService.displayTime(list[i].replyDate)+"</small></div>";
+						str += " <div><p>"+list[i].reply+"</p></div></li>";
+					}
+					replyUL.html(str);
+				});
+			}
+
 		
+			
 	// for replyService add test
 /* 		replyService.add(
 			{reply:"JS Test",replyer:"tester", bno:bnoValue}
@@ -59,8 +84,8 @@
 
 	// 단순히 댓글의 번호만을 전달
 /* 	replyService.get(10, function(data){
-		console.log(data);*/
-	}) 
+		console.log(data); */
+	});
 		
 	</script>
 	
@@ -68,31 +93,6 @@
 		$(document).ready(function(){
 			
 			var formObj = $("form[name='readForm']");
-			
-			var bnoValue = '<c:out value="${read.bno}"/>';
-			var replyUL = $(".chat");
-
-			showList(1);
-
-			function showList(page){
-
-				replyService.getList({bno:bnoValue,page: page || 1}, function(list){
-
-					var str = "";
-					if(list == null || list.length == 0){
-						replyUL.html("");
-						return;
-					}
-					for(var i=0, len = list.length || 0; i<len; i++){
-						str += "<li data-rno='"+list[i].rno+"'>";
-						str += " <div><strong>"+list[i].replyer+"</strong>";
-						str += "   <small>"+list[i].replyDate+"</small></div>";
-						str += "       <p>"+list[i].reply+"</p></li><hr/>";
-					}
-					replyUL.html(str);
-				});
-			}
-		
 			
 			// 수정 
 			$(".update_btn").on("click", function(){
@@ -183,14 +183,15 @@
 					<hr/>
 				</div>
 				<ul class="chat" >
-					<li>
+					<li data-rno='12'>
 						<div>
 							<strong>user00</strong>
-							<small>2020-08-07</small>
+							<small>2020-08-11 13:13</small>
 						</div>
-						<p>Good job!</p>
+						<div>
+							<p>Good job!</p>	
+						</div>
 					</li>
-					<hr/>
 				</ul>
 			</div>
 		</div>
