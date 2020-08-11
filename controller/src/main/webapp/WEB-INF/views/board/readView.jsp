@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<html>
-	<head>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	 	<title>게시판</title>
-	 	<style>
-	 		ul{list-style:none;}
-	 	</style>
-	</head>
+<%@include file="../includes/header.jsp" %>
+
+	 <style>
+	 	ul{list-style:none;}
+	 </style>
 
 	 <script type="text/javascript" src="/resources/js/reply.js"></script>	
 	 <script>
@@ -123,77 +120,65 @@
 		})
 	</script>
 	
-	<body>
-	
-		<div id="root">
-			<header>
-				<h1> 게시판</h1>
-			</header>
-			<hr />
+	 <div id="page-wrapper">
+		<div class="row">
+        	<div class="col-lg-12">
+            	<h1 class="page-header">Board Register</h1>
+           	</div>
+                <!-- /.col-lg-12 -->
+        </div>
+		<hr />
 			 
-			<div>
-				<%@include file="nav.jsp" %>
-			</div>
-			<hr/>
-			
-			<section id="container">
-				<form name="readForm" role="form" method="post">
-					<input type="hidden" id="bno" name="bno" value="<c:out value="${read.bno}" />">
-					<input type="hidden" name='page' value='<c:out value="${cri.page }" />'>
-					<input type="hidden" name="perPageNum" value='<c:out value="${cri.perPageNum }" />'>
-					<input type="hidden" name="type" value='<c:out value="${cri.type }" />'>
-					<input type="hidden" name="keyword" value='<c:out value="${cri.keyword }"/>'>
-				</form>
-				<table>
-					<tbody>
-						<tr>
-							<td>
-								<label for="title">제목</label><input type="text" id="title" name="title" value="${read.title}" readonly="readonly" />
-							</td>
-						</tr>	
-						<tr>
-							<td>
-								<label for="content">내용</label><textarea id="content" name="content" readonly="readonly"><c:out value="${read.content}" /></textarea>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label for="writer">작성자</label><input type="text" id="writer" name="writer" value="${read.writer}"  readonly="readonly"/>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label for="regdate">작성날짜</label>
-								<fmt:formatDate value="${read.regdate}" pattern="yyyy-MM-dd" />					
-							</td>
-						</tr>		
-					</tbody>			
-				</table>
-				<div>
-					<button type="submit" class="update_btn">수정</button>
-					<button type="submit" class="delete_btn">삭제</button>
-					<button type="submit" class="list_btn">목록</button>	
-				</div>
-			</section>
-			<hr />
-			
-			<div>
-				<div>
-					<i>Reply</i>
-					<hr/>
-				</div>
-				<ul class="chat" >
-					<li data-rno='12'>
-						<div>
-							<strong>user00</strong>
-							<small>2020-08-11 13:13</small>
+			 <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        	Board Register
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                        	 <div class="panel-body">
+		                         <form name="readForm" role="form" method="post">
+									<input type="hidden" id="bno" name="bno" value="<c:out value="${read.bno}" />">
+									<input type="hidden" name='page' value='<c:out value="${cri.page }" />'>
+									<input type="hidden" name="perPageNum" value='<c:out value="${cri.perPageNum }" />'>
+									<input type="hidden" name="type" value='<c:out value="${cri.type }" />'>
+									<input type="hidden" name="keyword" value='<c:out value="${cri.keyword }"/>'>
+								</form>
+								<table>
+									<tbody>
+										<tr>
+											<td>
+												<label for="title">제목</label><input type="text" id="title" class="form-control" name="title" value="${read.title}" readonly="readonly" />
+											</td>
+										</tr>	
+										<tr>
+											<td>
+												<label for="content">내용</label><textarea id="content" class="form-control" name="content"  cols="40" rows="10" readonly="readonly"><c:out value="${read.content}" /></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label for="writer">작성자</label><input type="text" id="writer" class="form-control" name="writer" value="${read.writer}"  readonly="readonly"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label for="regdate">작성날짜</label>
+												<fmt:formatDate value="${read.regdate}" pattern="yyyy-MM-dd" />					
+											</td>
+										</tr>		
+									</tbody>			
+								</table>
+								<div>
+									<button type="submit" class="update_btn">수정</button>
+									<button type="submit" class="delete_btn">삭제</button>
+									<button type="submit" class="list_btn">목록</button>	
+								</div>
+							</div>
 						</div>
-						<div>
-							<p>Good job!</p>	
-						</div>
-					</li>
-				</ul>
+					</div>
+				</div>
 			</div>
-		</div>
-	</body>
-</html>
+		<hr />
+		<%@include file="../includes/footer.jsp" %>
