@@ -6,8 +6,19 @@
 		select * from board_usual 
 		order by bGroup desc, bOrder limit ${starting}, ${pagePerNum}
 	</select>
+	
+	<select id="selectBoardAllListWithKeyword" resultType="BoardVO" parameterType="HashMap">
+		select * from board_usual
+		where ${select} like '%${keyword}%'
+		order by bGroup desc, bOrder limit ${starting}, ${pagePerNum}
+	</select>
+	
 	<select id="selectBoardCount" resultType="int">
 		select count(*) from board_usual
+	</select>
+	
+	<select id="selectBoardCountWithKeyword" resultType="int" parameterType="HashMap">
+		select count(*) from board_usual where ${select} like '%${keyword}%'
 	</select>
 	
 	<select id="maxBId" resultType="Integer" parameterType="int">

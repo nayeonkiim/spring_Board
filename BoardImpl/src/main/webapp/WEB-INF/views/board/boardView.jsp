@@ -5,9 +5,26 @@
 <c:set var="perPageBlock" value="${list.perPageBlock}" />
 <c:set var="list" value="${list.lists}" />
 				<div class="mt-5"></div>
+				
+				<form action="/board/boardView/1" class="float-right mb-3">
+					<div class="input-group mb-3">
+					  <select class="custom-select" id="inputGroupSelect01" name="select">
+					    <option value="none" selected>----</option>
+					    <option value="bTitle">제목</option>
+					    <option value="bUserId">아이디</option>
+					  </select>
+					</div>
+					<input type="text" name="keyword">
+					<input type="submit" value="검색" >
+				</form>
+				
 				<a href="/board/boardWrite/0" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false">
   					글쓰기
-				</a>	
+				</a>
+				<a href="/board/boardView/${curPage}" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false">
+  					목록으로
+				</a>
+				
 				<table class="table table-hover mt-3">
 				  <thead>
 				    <tr>
@@ -36,7 +53,7 @@
 				    </c:forEach>
 				  </tbody>
 				</table>
-
+				
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination justify-content-center">
 				  	<c:set var="pre" value="${pageNumInfo[0]/perPageBlock}" />

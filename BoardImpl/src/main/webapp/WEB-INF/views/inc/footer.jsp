@@ -5,6 +5,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<script type="text/javascript" src="/resources/js/bootstrap.js"></script>
 </body>
 </html>

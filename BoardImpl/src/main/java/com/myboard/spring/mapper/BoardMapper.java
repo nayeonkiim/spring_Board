@@ -10,8 +10,12 @@ import com.myboard.spring.vo.BoardVO;
 public interface BoardMapper {
 	//전체 글 갯수 select
 	public int selectBoardCount();
+	//keyword 기준 글 갯수 return
+	public int selectBoardCountWithKeyword(Map<String, Object> map);
 	//전체 게시글 select
-	public List<BoardVO> selectBoardAllList(Map<String,Integer> map);
+	public List<BoardVO> selectBoardAllList(Map<String, Object> map);
+	//keyword 기준 전체 게시글 return
+	public List<BoardVO> selectBoardAllListWithKeyword(Map<String, Object> map);
 	//글 하나 select
 	public BoardVO selectOneList(int bId);
 	//글 하나 update
@@ -28,4 +32,7 @@ public interface BoardMapper {
 	public void updatebGoodHate(Map<String, Object> map);
 	//공감,비공감 select
 	public int selectbGoodHate(Map<String, Object> map);
+	//키워드로 글 다시 출력
+	public void selectByKeyword(Map<String, String> map);
+
 }

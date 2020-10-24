@@ -1,6 +1,7 @@
 package com.myboard.spring.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,18 @@ public class BoardService {
 	@Autowired
 	private BoardMapper mapper;
 	
-	public int[] selectPageNum(int page) {
-		int numOfpost = mapper.selectBoardCount();
+	public int[] selectPageNum(Map<String, Object> map) {
+		int page = (int) map.get("page");
+		
+		int numOfpost = 0;
+		
+		//keyword가 있는 경우
+		if((boolean) map.get("has")) {
+			numOfpost = mapper.selectBoardCountWithKeyword(map);
+		}else{
+			numOfpost = mapper.selectBoardCount();
+		}
+		
 		int totalPage = numOfpost/10;
 		
 		if(numOfpost%10 != 0) {
@@ -35,14 +46,24 @@ public class BoardService {
 	}
 	
 	//메인 글 목록 화면 리턴
-	public Map<String, Object> selectBoardList(int page){
+	public Map<String, Object> selectBoardList(Map<String, Object> getMap){
 		//총 게시글 수, 총 페이지 수
-		Map<String, Integer> map = new HashMap<>();
-		map.put("starting",(page-1)*pagePerNum);
+		Map<String, Object> map = new HashMap<>();
+		map.put("starting",((int)getMap.get("page")-1)*pagePerNum);
 		map.put("pagePerNum",pagePerNum);
 		
+		List<BoardVO> vo = null;
+		//keyword가 존재함
+		if((boolean) getMap.get("has")) {
+			map.put("select",(String) getMap.get("select"));
+			map.put("keyword",(String) getMap.get("keyword"));
+			vo = mapper.selectBoardAllListWithKeyword(map);
+		}else {
+			vo = mapper.selectBoardAllList(map);
+		}
+		
 		Map<String, Object> listMap = new HashMap<>();
-		listMap.put("lists",mapper.selectBoardAllList(map));
+		listMap.put("lists",vo);
 		listMap.put("perPageBlock",perPageBlock);
 		//10개만 select 됨.
 		return listMap;
@@ -129,5 +150,4 @@ public class BoardService {
 		}
 		return null;
 	}
-	
 }

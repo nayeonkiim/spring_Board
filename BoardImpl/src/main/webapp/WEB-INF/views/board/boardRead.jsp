@@ -7,7 +7,7 @@
       		제목 <input type="text" readonly class="form-control-plaintext" value="${board.bTitle}">
     	</div>
 	  	<div class="col-md-10 mb-3">
-      		글쓴이 <input type="text" readonly class="form-control-plaintext" value="${board.bUserId}/(${board.bUsername})">
+      		글쓴이 <input type="text" readonly class="form-control-plaintext" value="${board.bUsername}/(${board.bUserId})">
       	</div>
 	  	<div class="form-group">
 	     	내용<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" readonly>${board.bContent}</textarea>

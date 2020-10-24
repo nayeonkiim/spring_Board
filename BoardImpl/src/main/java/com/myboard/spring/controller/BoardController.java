@@ -26,15 +26,27 @@ public class BoardController {
 		return "redirect:/board/boardView/1";
 	}
 	
-	//page 해당 게시글 보기
+	//page 해당 게시글 보기 - 키워드를 통해 들어온 경우(0), 아닌 경우
 	@RequestMapping("/board/boardView/{page}")
-	public String toMainView(@PathVariable int page, Model model) {
-		//startpage, endpage 정보가 넘어옴
-		int[] pageNumInfo = service.selectPageNum(page);
+	public String toMainView(@PathVariable int page, @RequestParam(required=false, defaultValue="null") String select, 
+								@RequestParam(required=false, defaultValue="null") String keyword, Model model) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("page", page);
+		if(select.equals("bTitle") || select.equals("bUserId")) {
+			map.put("has", true);
+			map.put("select", select);
+			map.put("keyword", keyword);
+		}else if(select.equals("null") && keyword.equals("null")){
+			map.put("has", false);
+		}
+		
+		//시작과 끝 블록 리턴
+		int[] pageNumInfo = service.selectPageNum(map);
 		
 		model.addAttribute("curPage",page);
 		model.addAttribute("pageNumInfo",pageNumInfo);
-		model.addAttribute("list",service.selectBoardList(page));
+		model.addAttribute("list",service.selectBoardList(map));
 		return "/board/boardView";
 	}
 	
@@ -82,7 +94,7 @@ public class BoardController {
 		return "redirect:/board/boardView/1";
 	}
 	
-	//공감, 비공감
+	//공감 업데이트
 	@RequestMapping("/board/boardBGood")
 	@ResponseBody
 	public Object bGoodUpdate(@RequestParam int bId) {
@@ -99,6 +111,7 @@ public class BoardController {
 			return null;
 	}
 	
+	//비공감 업데이트
 	@RequestMapping("/board/boardBHate")
 	@ResponseBody
 	public Object bHateUpdate(@RequestParam int bId) {
@@ -114,5 +127,4 @@ public class BoardController {
 		}else 
 			return null;
 	}
-
 }

@@ -21,6 +21,7 @@
 	    <textarea class="form-control" name="bContent" id="exampleFormControlTextarea1" rows="3"></textarea>
 	  </div>
 	  <button type="submit" class="btn btn-primary">Submit</button>
+	  <a href="/board/boardView/1" type="submit" class="btn btn-primary">목록으로</a>
 	</form>
 
 <%@ include file="/WEB-INF/views/inc/footer.jsp" %>
