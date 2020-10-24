@@ -33,4 +33,16 @@
 		update board_usual set bOrder = bOrder+1
 		where bGroup=${bGroup} and bOrder > ${bOrder}
 	</update>
+	
+	<update id="updatebHit" parameterType="int">
+		update board_usual set bHit = bHit+1 where bId=#{bId}
+	</update>
+	
+	<update id="updatebGoodHate" parameterType="HashMap">
+		update board_usual set ${GoodOrHate} = ${GoodOrHate}+1 where bId=#{bId}
+	</update>
+	
+	<select id="selectbGoodHate" parameterType="HashMap" resultType="int">
+		select ${GoodOrHate} from board_usual where bId=#{bId}
+	</select>
 </mapper>

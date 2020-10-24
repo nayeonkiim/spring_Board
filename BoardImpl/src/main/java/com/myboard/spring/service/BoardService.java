@@ -50,6 +50,8 @@ public class BoardService {
 	
 	//글 정보 출력
 	public BoardVO selectOneBoardList(int bId) {
+		//조회수 업데이트
+		mapper.updatebHit(bId);
 		
 		BoardVO vo = mapper.selectOneList(bId);
 		return vo;
@@ -114,6 +116,18 @@ public class BoardService {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public Integer updatebGoodbHateNum(Map<String, Object> map) {
+		try {
+			//1 증가 업데이트
+			mapper.updatebGoodHate(map);
+			Integer result = mapper.selectbGoodHate(map);
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

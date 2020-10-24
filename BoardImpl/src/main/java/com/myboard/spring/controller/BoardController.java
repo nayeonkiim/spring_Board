@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.myboard.spring.service.BoardService;
 import com.myboard.spring.vo.BoardVO;
@@ -78,4 +81,38 @@ public class BoardController {
 		service.insertWriting(bId, boardvo);
 		return "redirect:/board/boardView/1";
 	}
+	
+	//공감, 비공감
+	@RequestMapping("/board/boardBGood")
+	@ResponseBody
+	public Object bGoodUpdate(@RequestParam int bId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Integer> returnMap = new HashMap<>();
+		map.put("bId", bId);
+		map.put("GoodOrHate","bGood");
+		
+		Integer result = service.updatebGoodbHateNum(map);
+		if(result != null) {
+			returnMap.put("bGoodCount", result);
+			return returnMap;
+		}else 
+			return null;
+	}
+	
+	@RequestMapping("/board/boardBHate")
+	@ResponseBody
+	public Object bHateUpdate(@RequestParam int bId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Integer> returnMap = new HashMap<>();
+		map.put("bId", bId);
+		map.put("GoodOrHate","bHate");
+		
+		Integer result = service.updatebGoodbHateNum(map);
+		if(result != null) {
+			returnMap.put("bHateCount", result);
+			return returnMap;
+		}else 
+			return null;
+	}
+
 }

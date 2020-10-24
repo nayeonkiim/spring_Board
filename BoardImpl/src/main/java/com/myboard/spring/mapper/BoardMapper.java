@@ -22,4 +22,10 @@ public interface BoardMapper {
 	public Integer maxBId(int bId);
 	//댓글들 bOreder + 1
 	public void updateComments(Map<String, Integer> map);
+	//조회수 update
+	public void updatebHit(int bId);
+	//공감,비공감 업데이트
+	public void updatebGoodHate(Map<String, Object> map);
+	//공감,비공감 select
+	public int selectbGoodHate(Map<String, Object> map);
 }
