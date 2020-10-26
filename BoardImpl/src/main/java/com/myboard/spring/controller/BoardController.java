@@ -39,6 +39,8 @@ public class BoardController {
 			map.put("keyword", keyword);
 		}else if(select.equals("null") && keyword.equals("null")){
 			map.put("has", false);
+		}else if(select.equals("none") && keyword.equals("null")) {
+			map.put("has", false);
 		}
 		
 		//시작과 끝 블록 리턴
